@@ -46,7 +46,7 @@ export const exampleCollections = buildCollection<ExampleEntity>({
     singularName: "ExampleCollection",
     path: "CollectionPath",
     ** textSearchEnabled: true, **
-    ** callbacks: FolderCallbacks, **
+    ** callbacks: exampleCallback, **
     properties: {...
 ```
 
