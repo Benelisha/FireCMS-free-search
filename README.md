@@ -45,10 +45,12 @@ export const exampleCollections = buildCollection<ExampleEntity>({
     name: "ExampleCollections",
     singularName: "ExampleCollection",
     path: "CollectionPath",
-    textSearchEnabled: true,
-    callbacks: FolderCallbacks,
+    ** textSearchEnabled: true, **
+    ** callbacks: FolderCallbacks, **
     properties: {...
 ```
+
+
 2) In your App.tsx file (or any other suitable location as mentioned in the documentation), add the textSearchController function. This function will handle the actual search functionality. Here's an example of how to define the textSearchController:
 
 ```
