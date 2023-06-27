@@ -1,12 +1,8 @@
-Certainly! Here's an example template for a good README file that you can use as a starting point for your GitHub repository:
+# FireCMS Search Extension
 
-# Project Name
-
-Briefly introduce your project with a concise title and provide a brief description or overview of what your project does.
+The FireCMS Search Extension is an external class that extends the functionality of the FireCMS library. FireCMS is a powerful library for creating administration panels for Firestore databases. However, the default functionality of FireCMS does not include search capabilities out of the box.
 
 ## Table of Contents
-
-Include a table of contents to help users navigate through your README.
 
 - [Features](#features)
 - [Installation](#installation)
@@ -17,11 +13,34 @@ Include a table of contents to help users navigate through your README.
 
 ## Features
 
-List and describe the key features of your project. Explain what sets it apart and how it can be useful to users.
+* Search Functionality: Enhance your Firestore-based admin panel with a search capability. The FireCMS Search Extension provides a simple yet effective way to search through your Firestore data.
+* Seamless Integration: Integrate the search extension seamlessly into your existing FireCMS implementation without extensive modifications or dependencies.
+* Customizable: Customize the search functionality to meet your specific requirements. Modify the search behavior, search fields, or indexing strategies to best fit your Firestore data structure.
+* Efficient Data Exploration: Enable efficient data exploration by allowing administrators to quickly find relevant information within your Firestore database.
+* Free and Open-Source: The FireCMS Search Extension is completely free to use, and the source code is available on GitHub. Feel free to contribute, suggest improvements, or customize it to suit your needs.
 
 ## Installation
 
-Provide instructions on how to install and set up your project. Include any prerequisites or dependencies that need to be installed, as well as any necessary configuration steps.
+To integrate the FireCMS Search Extension into your project, follow the steps below:
+
+Copy the searcher.tsx file from this repository and place it anywhere in your project directory.
+
+Open the Firestore collection(s) in which you want to enable search functionality. Add the buildEntityCallbacks function to the collection's configuration to handle search-related actions. Here's an example of how to use buildEntityCallbacks:
+'''
+import { buildEntityCallbacks } from './searcher';
+
+const exampleCallback = buildEntityCallbacks({
+  onDelete: (props) => {
+    Searcher.deleteObjectById(props.entity.path, props.entityId);
+  },
+  onFetch: ({ collection, context, entity, path }) => {
+    Searcher.addObjectIfNotExists(path, entity.id, [entity.values.name]);
+    return entity;
+  },
+});
+'''
+
+
 
 ## Usage
 
