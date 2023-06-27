@@ -21,12 +21,14 @@ The FireCMS Search Extension is an external class that extends the functionality
 
 ## Installation
 
-To integrate the FireCMS Search Extension into your project, follow the steps below:
-
 Copy the searcher.tsx file from this repository and place it anywhere in your project directory.
 
+## Usage
+
+1) 
 Open the Firestore collection(s) in which you want to enable search functionality. Add the buildEntityCallbacks function to the collection's configuration to handle search-related actions. Here's an example of how to use buildEntityCallbacks:
-'''
+
+```
 import { buildEntityCallbacks } from './searcher';
 
 const exampleCallback = buildEntityCallbacks({
@@ -38,17 +40,48 @@ const exampleCallback = buildEntityCallbacks({
     return entity;
   },
 });
-'''
 
+export const exampleCollections = buildCollection<ExampleEntity>({
+    name: "ExampleCollections",
+    singularName: "ExampleCollection",
+    path: "CollectionPath",
+    textSearchEnabled: true,
+    callbacks: FolderCallbacks,
+    properties: {...
+```
+2) In your App.tsx file (or any other suitable location as mentioned in the documentation), add the textSearchController function. This function will handle the actual search functionality. Here's an example of how to define the textSearchController:
 
+```
+import { FirestoreTextSearchController } from 'firecms';
 
-## Usage
+const textSearchController: FirestoreTextSearchController = ({ path, searchString }) => {
+  return Searcher.filterObjectsByData(path, searchString);
+};
+```
+
+3) Add the textSearchController to your App component as a prop. Here's an example of how to include it:
+```
+<App
+  // Other props...
+  textSearchController={textSearchController}
+/>
+```
+
 
 Demonstrate how to use your project, providing code examples or step-by-step instructions. Include screenshots or GIFs if applicable.
 
 ## Configuration
 
-Explain any configuration options or settings that users can modify to customize the behavior of your project. Provide clear instructions and examples.
+Open the file where you are calling Searcher.addObjectIfNotExists(path, entity.id, [entity.values.name]).
+
+In the third parameter of the Searcher.addObjectIfNotExists function, provide an array of values that you want to enable search on. This array can contain any relevant properties or fields from your Firestore collection that you want to include in the search.
+For example, if your Firestore collection contains a name field that you want to include in the search, you can modify the code as follows:
+```
+Searcher.addObjectIfNotExists(path, entity.id, [entity.values.name, entity.values.description, etc...]);
+```
+
+
+
 
 ## Contributing
 
@@ -56,18 +89,29 @@ Describe how others can contribute to your project. Include guidelines for bug r
 
 ## License
 
-Specify the license under which your project is distributed. For example, if you use an open-source license like MIT or Apache, include the license text or provide a link to it.
+The FireCMS Search Extension is open and free for everyone to use. It is distributed under the MIT License, which allows you to use, modify, and distribute the extension for both personal and commercial purposes.
+
+You can find the full text of the MIT License in the LICENSE file.
+
+We welcome contributions and suggestions to improve the FireCMS Search Extension. Feel free to fork the repository, make changes, and submit pull requests.
+
 
 ## Acknowledgments
 
-If there are any individuals or projects that have inspired or assisted your work, acknowledge them here. You can also include links to external resources that have been helpful.
+We would like to acknowledge that while the search implementation provided by the FireCMS Search Extension may not be the most advanced or sophisticated solution available, it offers a simple and effective way to enable search functionality within your Firestore-based admin panel.
+
+We understand that there are various third-party apps and services that offer more comprehensive search capabilities, but they often come with associated costs and complex configuration requirements. The FireCMS Search Extension aims to provide a lightweight and accessible alternative, allowing you to avoid the hassle and expenses associated with integrating external search services.
+
+We appreciate your understanding and hope that the FireCMS Search Extension proves to be a useful tool for your project.
+
 
 ## Contact
 
-Provide your contact information, such as your email address or a link to your personal website or social media profiles, so that users can reach out to you if they have any questions or feedback.
+For any questions, suggestions, or feedback regarding the FireCMS Search Extension, please feel free to reach out to us.
+Contact: Ease99studio@gmail.com
+Or [Ease99](https://Ease99.com)
+
 
 ---
-
-Feel free to customize this template to fit your specific project. Make sure to provide clear and concise information, use proper formatting and styling, and include any relevant links or resources. A well-written README file will help users understand your project and encourage them to engage with it.
 
 Good luck with your project!
