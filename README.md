@@ -25,8 +25,7 @@ Copy the searcher.tsx file from this repository and place it anywhere in your pr
 
 ## Usage
 
-1) 
-Open the Firestore collection(s) in which you want to enable search functionality. Add the buildEntityCallbacks function to the collection's configuration to handle search-related actions. Here's an example of how to use buildEntityCallbacks:
+1) Open the Firestore collection(s) in which you want to enable search functionality. Add the buildEntityCallbacks function to the collection's configuration to handle search-related actions. Here's an example of how to use buildEntityCallbacks:
 
 ```
 import { buildEntityCallbacks } from './searcher';
@@ -69,9 +68,6 @@ const textSearchController: FirestoreTextSearchController = ({ path, searchStrin
 />
 ```
 
-
-Demonstrate how to use your project, providing code examples or step-by-step instructions. Include screenshots or GIFs if applicable.
-
 ## Configuration
 
 Open the file where you are calling Searcher.addObjectIfNotExists(path, entity.id, [entity.values.name]).
@@ -86,8 +82,8 @@ Searcher.addObjectIfNotExists(path, entity.id, [entity.values.name, entity.value
 
 
 ## Contributing
+We welcome contributions from the community to help improve the FireCMS Search Extension. If you have any ideas, suggestions, bug fixes, or enhancements, please feel free to contribute.
 
-Describe how others can contribute to your project. Include guidelines for bug reports, feature requests, and pull requests. Mention any code formatting or style conventions that contributors should follow. Provide information on how to contact you or your team.
 
 ## License
 
