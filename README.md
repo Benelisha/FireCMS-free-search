@@ -111,7 +111,7 @@ We appreciate your understanding and hope that the FireCMS Search Extension prov
 
 For any questions, suggestions, or feedback regarding the FireCMS Search Extension, please feel free to reach out to us.
 Contact: Ease99studio@gmail.com
-Or [Ease99](https://Ease99.com)
+or [Ease99](https://Ease99.com)
 
 
 ---
