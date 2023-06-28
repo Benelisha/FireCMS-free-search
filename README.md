@@ -54,7 +54,7 @@ return <FirebaseCMSApp
         name={"FireCMS-free-search"}
         *** textSearchController={Searcher.textSearchController} ***
         authentication={myAuthenticator}
-        collections={[exampleCollctions]}
+        collections={[exampleCollections]}
         firebaseConfig={firebaseConfig}
     />;
 ```
