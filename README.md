@@ -27,12 +27,16 @@ Copy the searcher.tsx file from this repository and place it anywhere in your pr
 import { buildEntityCallbacks } from './searcher';
 
 const exampleCallback = buildEntityCallbacks({
-  onDelete: (props) => {
-    Searcher.deleteObjectById(props.entity.path, props.entityId);
+  onSaveSuccess: (entity) => {
+        Searcher.addObjectIfNotExists(entity.path, entity.entityId, [entity.values.name]);
+        return entity;
   },
   onFetch: ({ collection, context, entity, path }) => {
     Searcher.addObjectIfNotExists(path, entity.id, [entity.values.name]);
     return entity;
+  },
+  onDelete: (props) => {
+    Searcher.deleteObjectById(props.entity.path, props.entityId);
   },
 });
 
