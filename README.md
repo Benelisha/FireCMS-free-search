@@ -29,7 +29,6 @@ import { buildEntityCallbacks } from './searcher';
 const exampleCallback = buildEntityCallbacks({
   onSaveSuccess: (entity) => {
         Searcher.addObjectIfNotExists(entity.path, entity.entityId, [entity.values.name]);
-        return entity;
   },
   onFetch: ({ collection, context, entity, path }) => {
     Searcher.addObjectIfNotExists(path, entity.id, [entity.values.name]);
