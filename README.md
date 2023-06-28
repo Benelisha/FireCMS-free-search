@@ -51,10 +51,10 @@ export const exampleCollections = buildCollection<ExampleEntity>({
 import { FirestoreTextSearchController } from 'firecms';
 ...
 return <FirebaseCMSApp
-        name={"Trivia Hold'em CMS"}
+        name={"FireCMS-free-search"}
         *** textSearchController={Searcher.textSearchController} ***
         authentication={myAuthenticator}
-        collections={[foldersCollections, answersCollections, versionCollections]}
+        collections={[exampleCollctions]}
         firebaseConfig={firebaseConfig}
     />;
 ```
