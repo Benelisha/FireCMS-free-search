@@ -68,7 +68,7 @@ Open the file where you are calling Searcher.addObjectIfNotExists(path, entity.i
 In the third parameter of the Searcher.addObjectIfNotExists function, provide an array of values that you want to enable search on. This array can contain any relevant properties or fields from your Firestore collection that you want to include in the search.
 For example, if your Firestore collection contains a name field that you want to include in the search, you can modify the code as follows:
 ```
-Searcher.addObjectIfNotExists(path, entity.id, [entity.values.name, entity.values.description, etc...]);
+Searcher.addObjectIfNotExists(path, entity.id, [entity.values.name, entity.values.description, ...]);
 ```
 
 
