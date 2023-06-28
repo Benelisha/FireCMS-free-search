@@ -24,7 +24,7 @@ Copy the searcher.tsx file from this repository and place it anywhere in your pr
 1) Open the Firestore collection(s) in which you want to enable search functionality. Add the buildEntityCallbacks function to the collection's configuration to handle search-related actions. Here's an example of how to use buildEntityCallbacks:
 
 ```
-import { buildEntityCallbacks } from './searcher';
+import {Searcher} from "./searcher.tsx";
 
 const exampleCallback = buildEntityCallbacks({
   onSaveSuccess: (entity) => {
@@ -52,6 +52,7 @@ export const exampleCollections = buildCollection<ExampleEntity>({
 2) In your App.tsx file (or any other suitable location as mentioned in the documentation), add the textSearchController function. This function will handle the actual search functionality. Here's an example of how to define the textSearchController:
 ```
 import { FirestoreTextSearchController } from 'firecms';
+import {Searcher} from "./searcher.tsx";
 ...
 return <FirebaseCMSApp
         name={"FireCMS-free-search"}
