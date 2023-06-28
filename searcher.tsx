@@ -1,3 +1,5 @@
+import {FirestoreTextSearchController} from "firecms";
+
 interface MyObject {
     id: string;
     data: string[];
@@ -7,9 +9,43 @@ const ShowLogs = false;
 
 export class Searcher {
 
+    static timeoutId: NodeJS.Timeout | undefined;
+    static debounceTime = 300;
+    static textSearchController: FirestoreTextSearchController = ({ path, searchString }) => {
+        // Clear previous timeout if exists
+        if (Searcher.timeoutId) {
+            clearTimeout(Searcher.timeoutId);
+        }
+        // Create a new Promise to wrap the search logic
+        return new Promise<readonly string[]>((resolve) => {
+            // Schedule a new search with a delay of 300 milliseconds
+            Searcher.timeoutId = setTimeout(() => {
+                const result = Searcher.filterObjectsByData(path, searchString);
+                if (ShowLogs) console.log('Search->', searchString, result);
+
+                // Resolve the Promise with the search results or empty array if undefined
+                resolve(result || []);
+            }, Searcher.debounceTime);
+        });
+    };
+
+
+
+
+
+
+
+
     static clearMap(): void {
         Object.keys(paths).forEach((key) => delete paths[key]);
     }
+
+
+
+
+
+
+
 
     static addObjectIfNotExists(path: string, id: string, newData: string[]): void {
         const objects = paths[path] || [];
@@ -25,6 +61,13 @@ export class Searcher {
         }
     }
 
+
+
+
+
+
+
+
     static deleteObjectById(path: string, id: string): void {
         const objects = paths[path] || [];
         const index = objects.findIndex(obj => obj.id === id);
@@ -36,7 +79,13 @@ export class Searcher {
         }
     }
 
-    // static filterObjectsByData(path: string, input: string): string[] {
+
+
+
+
+
+
+
     static filterObjectsByData(path: string, input: string): Promise<readonly string[]> | undefined {
 
         const objects = paths[path] || [];
@@ -58,9 +107,11 @@ export class Searcher {
         );
         const ids = filteredObjects.map(obj => obj.id);
 
-        console.log("search", input, ids);
+        if (ShowLogs) console.log('Search->', input, ids);
 
         return Promise.resolve(ids);
     }
+
+
 }
 
