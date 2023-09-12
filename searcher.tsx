@@ -1,4 +1,4 @@
-import {FirestoreTextSearchController} from "firecms";
+import {EntityValues, FirestoreTextSearchController} from "firecms";
 
 interface MyObject {
     id: string;
@@ -44,20 +44,20 @@ export class Searcher {
 
 
 
-
-
-
     static addObjectIfNotExists(path: string, id: string, newData: string[]): void {
+
+        if (!id && id === "") return;
+
         const objects = paths[path] || [];
         const existingObject = objects.find(obj => obj.id === id);
         if (existingObject) {
             existingObject.data = newData;
-            if (ShowLogs) console.log(`Updated object with ID ${id} in path ${path}.`);
+            if (ShowLogs) console.log(`Updated object with ID ${id} in path ${path}. Data: ${existingObject.data}`);
         } else {
             const newObject: MyObject = { id, data: newData };
             objects.push(newObject);
             paths[path] = objects;
-            if (ShowLogs) console.log(`Added object with ID ${id} to path ${path}.`);
+            if (ShowLogs) console.log(`Added object with ID ${id} to path ${path}. Data: ${newObject.data}`);
         }
     }
 
@@ -95,9 +95,13 @@ export class Searcher {
                 const lowercasedData = data.toLowerCase();
                 let inputIndex = 0;
                 for (let i = 0; i < lowercasedData.length; i++) {
+
+                    if (ShowLogs) console.log('Search loop->', lowercasedInput[inputIndex]);
+
                     if (lowercasedData[i] === lowercasedInput[inputIndex]) {
                         inputIndex++;
                     }
+
                     if (inputIndex === lowercasedInput.length) {
                         return true;
                     }
@@ -112,6 +116,21 @@ export class Searcher {
         return Promise.resolve(ids);
     }
 
+
+
+
+
+    static convertValuesToArray(values: EntityValues<any>)
+    {
+        const valuesArray = Object.values(values).flatMap(value => {
+            if (Array.isArray(value)) {
+                return value.map(String);
+            }
+            return String(value);
+        });
+        if (ShowLogs) console.log('converted values: ' + valuesArray);
+        return valuesArray;
+    }
 
 }
 
